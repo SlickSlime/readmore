@@ -43,6 +43,7 @@ class ReadMoreText extends StatefulWidget {
     this.delimiterStyle,
     this.annotations,
     this.isExpandable = true,
+    this.onPressed,
     this.style,
     this.strutStyle,
     this.textAlign,
@@ -76,6 +77,7 @@ class ReadMoreText extends StatefulWidget {
     this.delimiter = '$_kEllipsis ',
     this.delimiterStyle,
     this.isExpandable = true,
+    this.onPressed,
     this.style,
     this.strutStyle,
     this.textAlign,
@@ -137,6 +139,9 @@ class ReadMoreText extends StatefulWidget {
   /// Expand text on readMore press
   final bool isExpandable;
 
+  /// Callback triggered when the text is pressed and [isExpandable] is false
+  final VoidCallback? onPressed;
+
   final String delimiter;
   final String? data;
   final TextSpan? richData;
@@ -182,6 +187,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
   void _onTap() {
     if (widget.isExpandable) {
       _effectiveIsCollapsed.value = !_effectiveIsCollapsed.value;
+    } else {
+      widget.onPressed?.call();
     }
   }
 
